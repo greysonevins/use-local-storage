@@ -1,0 +1,8 @@
+{
+  "short_name": "@greysonevins/use-local-storage",
+  "name": "@greysonevins/use-local-storage",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
