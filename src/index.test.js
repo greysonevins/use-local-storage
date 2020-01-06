@@ -1,29 +1,40 @@
-import { useMyHook } from './'
+import { useLocalStorage } from './'
 import { renderHook, act } from "@testing-library/react-hooks";
 
-// mock timer using jest
-jest.useFakeTimers();
 
-describe('useMyHook', () => {
-  it('updates every second', () => {
-    const { result } = renderHook(() => useMyHook());
+describe('useLocalStorage', () => {
 
-    expect(result.current).toBe(0);
+  afterEach(() => {
+    window.localStorage.removeItem('test')
+  })
+  const testKey = 'test'
+  const initialValue = ''
+  test('should return an array with the value and a setter function: localStorage and setLocalStorage', () => {
+    const { result } = renderHook(() => useLocalStorage(testKey, initialValue))
+    // expect(result.current).toHaveProperty('localStorage')
+    const [localStorage, setLocalStorage] = result.current
+    expect(localStorage).toBe(initialValue)
+    expect(typeof setLocalStorage).toBe('function')
+  })
+  test('should update localStorage when using setLocalStorage', () => {
+    const { result } = renderHook(() => useLocalStorage(testKey, initialValue))
 
-    // Fast-forward 1sec
+    const nextValue = 'test1'
+
     act(() => {
-      jest.advanceTimersByTime(1000);
-    });
-
-    // Check after total 1 sec
-    expect(result.current).toBe(1);
-
-    // Fast-forward 1 more sec
+      result.current[1](nextValue)
+    })
+    expect(JSON.parse(window.localStorage.getItem(testKey))).toEqual(nextValue)
+    expect(result.current[0]).toEqual(nextValue)
+  })
+  test('should delete localstorage when null is passed to useLocalStorage', () => {
+    const { result } = renderHook(() => useLocalStorage(testKey, initialValue))
     act(() => {
-      jest.advanceTimersByTime(1000);
-    });
-
-    // Check after total 2 sec
-    expect(result.current).toBe(2);
+      result.current[1](null)
+    })
+    const outPutValue = JSON.parse(window.localStorage.getItem(testKey))
+    const hasKey = window.localStorage.hasOwnProperty(testKey)
+    expect(outPutValue).toBe(null)
+    expect(hasKey).toBe(false)
   })
 })

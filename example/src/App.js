@@ -1,11 +1,33 @@
-import React from 'react'
-import { useMyHook } from '@greysonevins/use-local-storage'
+import React, {useState} from 'react'
+import { useLocalStorage } from '@greysonevins/use-local-storage'
 
 const App = () => {
-  const example = useMyHook()
+  const [localStorage, setLocalStorage] = useLocalStorage('test', '')
+  const [exampleText,setExampleText] = useState('')
+
   return (
     <div>
-      {example}
+      <p>Current Local Storage: {!! localStorage ? localStorage : 'undefined'}</p>
+      <input
+        onChange={(e) => setExampleText(e.target.value)}
+        placeholder={'set text'}
+        value={exampleText}
+      />
+      <button
+        onClick={
+          () => {
+            setLocalStorage(exampleText);
+            setExampleText('');
+          }
+        }
+      >
+        Change Local Storage
+      </button>
+      <button
+        onClick={() => setLocalStorage(null)}
+      >
+        delete localStorage
+      </button>
     </div>
   )
 }

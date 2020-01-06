@@ -1,7 +1,7 @@
 {
   "name": "@greysonevins/use-local-storage",
-  "version": "1.0.0",
-  "description": "custom localStorage hook to control for deleting etc",
+  "version": "0.0.0",
+  "description": "custom localStorage hook to control for deleting and updating. Created from @gragland blog about useLocalStorage but adjusted for my use. https://usehooks.com/useLocalStorage/",
   "author": "greysonevins",
   "license": "MIT",
   "repository": "greysonevins/use-local-storage",
