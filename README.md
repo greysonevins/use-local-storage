@@ -13,14 +13,36 @@ npm install --save @greysonevins/use-local-storage
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+const App = () => {
+  const [localStorage, setLocalStorage] = useLocalStorage('test', '')
+  const [exampleText,setExampleText] = useState('')
 
-import { useMyHook } from '@greysonevins/use-local-storage'
-
-const Example = () => {
-  const example = useMyHook()
+  // to delete
+  // setLocalStorage(null)
   return (
-    <div>{example}</div>
+    <div>
+      <p>Current Local Storage: {!! localStorage ? localStorage : 'undefined'}</p>
+      <input
+        onChange={(e) => setExampleText(e.target.value)}
+        placeholder={'set text'}
+        value={exampleText}
+      />
+      <button
+        onClick={
+          () => {
+            setLocalStorage(exampleText);
+            setExampleText('');
+          }
+        }
+      >
+        Change Local Storage
+      </button>
+      <button
+        onClick={() => setLocalStorage(null)}
+      >
+        delete localStorage
+      </button>
+    </div>
   )
 }
 ```
