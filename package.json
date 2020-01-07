@@ -1,6 +1,6 @@
 {
   "name": "@greysonevins/use-local-storage",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "custom localStorage hook to control for deleting and updating. Created from @gragland blog about useLocalStorage but adjusted for my use. https://usehooks.com/useLocalStorage/",
   "author": "greysonevins",
   "license": "MIT",
@@ -69,6 +69,6 @@
     "rollup-plugin-url": "^2.1.0"
   },
   "publishConfig": {
-    "access" : "public"
+    "access": "public"
   }
 }
